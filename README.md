@@ -38,6 +38,11 @@ SERVER | `gulp server` | 웹 서버 실행
 
 -
 
+#### 플러그인 제작 과정
+[Log_MakingjQueryPlugin.md](Log_MakingjQueryPlugin.md)
+
+-
+
 #### 플러그인 쉘
 ```js
 /*! jquery.plugin.shell.js © yamoo9.net, 2015 */
