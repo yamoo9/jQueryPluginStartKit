@@ -24,7 +24,8 @@ require(['../common'], function(common) {
 
 		// $gnb 인스턴스 객체에 플러그인 navigationBar() 연결
 		var $gnb = $('#gnb').navigationBar({
-			'prefix': 'yamoo9'
+			'prefix': 'yamoo9',
+			// 'aria': false,
 		});
 
 	});
