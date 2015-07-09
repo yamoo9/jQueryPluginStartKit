@@ -1,8 +1,16 @@
 ## 플러그인 제작 프로세스 ━ STEP 2
 
-STEP2 과정에서 처리되는 class 속성 및 WAI-ARIA 적용 결과 화면 스크린샷입니다. 플러그인에 설정된 class 속성 및 role, aria- 속성 및 상태 처리 결과를 볼 수 있습니다.
+STEP2 과정에서 처리되는 class 속성 및 WAI-ARIA 적용 결과 화면 스크린샷입니다.<br>
+플러그인에 설정된 `class` 속성 및 `role`, `aria-` 속성/상태 처리 결과를 볼 수 있습니다.
 
 ![동적으로 적용된 WAI-ARIA](GUIDE/setting-aria.png)
+
+-
+
+#### 내비게이션 제작을 위한 고려사항
+
+아래 코드를 살펴보시기 전에 무엇을 해야하는지 확인하세요.<br>
+**[접근성/사용성 높은 내비게이션 제작 방법](https://github.com/yamoo9/jQuery-Class/blob/master/DOC/DAY11.md#%EB%82%B4%EB%B9%84%EA%B2%8C%EC%9D%B4%EC%85%98-%EC%9C%84%EC%A0%AF%EC%97%90-%EC%A0%91%EA%B7%BC%EC%84%B1-%ED%96%A5%EC%83%81%EC%9D%84-%EC%9C%84%ED%95%9C-wai-aria-%EC%A0%81%EC%9A%A9)**
 
 -
 
