@@ -1,4 +1,10 @@
-## 플러그인 제작을 프로세스 ━ STEP 2
+## 플러그인 제작 프로세스 ━ STEP 2
+
+STEP2 과정에서 처리되는 class 속성 및 WAI-ARIA 적용 결과 화면 스크린샷입니다. 플러그인에 설정된 class 속성 및 role, aria- 속성 및 상태 처리 결과를 볼 수 있습니다.
+
+![동적으로 적용된 WAI-ARIA](GUIDE/setting-aria.png)
+
+-
 
 #### `<nav>` 요소 마크업 변경
 
@@ -289,9 +295,3 @@ var $gnb = $('#gnb').navigationBar({
 		});
 	},
 	```
-
--
-
-#### WAI-ARIA 적용 결과
-
-![동적으로 적용된 WAI-ARIA](GUIDE/setting-aria.png)
