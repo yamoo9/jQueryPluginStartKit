@@ -26,7 +26,7 @@ var SRC = 'src/',
 			build : [BID + 'css/', BID + 'css/part'],
 		},
 		js: {
-			src: [ SRC + 'js/**/*.js', SRC + '!test/*' ],
+			src: [ SRC + 'js/**/*', SRC + '!test/*' ],
 			out: OUT + 'js/',
 		},
 		img: {
