@@ -13,7 +13,8 @@ require(['../common'], function(common) {
 	require([
 		// 모듈 호출
 		'detectizr',
-		'utils/jquery.utils'
+		'utils/jquery.utils',
+		'plugins/navigationBar/jquery.navigationBar'
 	],
 	function(Detectizr) {
 		'use strict';
@@ -21,8 +22,10 @@ require(['../common'], function(common) {
 		// Detectizr 활용
 		Detectizr.detect();
 
-		// jQuery 버전, 콘솔 출력
-		console.log($.version, '\n메인페이지 호출');
+		// $gnb 인스턴스 객체에 플러그인 navigationBar() 연결
+		var $gnb = $('#gnb').navigationBar({
+			'prefix': 'yamoo9'
+		});
 
 	});
 
