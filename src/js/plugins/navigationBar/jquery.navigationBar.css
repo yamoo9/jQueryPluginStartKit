@@ -1,0 +1,27 @@
+/*! jquery.navigationBar.css © yamoo9.net, 2015 */
+
+.i11y-hidden {
+	overflow: hidden;
+	position: absolute;
+	clip:     rect(0 0 0 0);
+	clip:     rect(0,0,0,0);
+	width:    1px;
+	height:   1px;
+	margin:   -1px;
+	padding:  0;
+	border:   0;
+}
+.i11y-hidden.focusable:focus,
+.i11y-hidden.focusable:active {
+	overflow: visible;
+	position: static;
+	clip:     auto;
+	width:    auto;
+	height:   auto;
+	margin:   0;
+}
+
+.yamoo9-navigation-bar .lv-2,
+.yamoo9-navigation-bar .lv-3 {
+	display: none;
+}
