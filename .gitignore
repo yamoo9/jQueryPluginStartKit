@@ -1,6 +1,6 @@
 ###사용자정의###
 dist/
-build/
+# build/
 
 ###Node###
 

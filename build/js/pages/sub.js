@@ -1,0 +1,1 @@
+require(["../common"],function(){require(["plugins/skipNav/jquery.skipNav"],function(){"use strict";console.log($.version,"\n서브페이지 호출")})}),define("pages/sub",function(){});
