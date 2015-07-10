@@ -60,7 +60,7 @@ define([
 
 
 		/**
-		 * 설정: class, WAI-ARIA
+		 * 설정: refLvEls, class, WAI-ARIA
 		 * -----------------------------------------------------------------------------------
 		 */
 		'settings': function() {
@@ -233,46 +233,6 @@ define([
 			// 키보드 방향키 탐색 컨트롤에서 this.menuitemCurrent 참조
 			this.menuitemCurrent = $link.data('idx');
 		},
-		// 자동 닫힘 설정
-		'autoClose': function(e) {
-			var widget = this;
-			if (e.type === 'focusout') {
-				setTimeout(function() {
-					if(widget.$lv1.attr('aria-activedescendant') == '') {
-						widget.removeAllActiveClass();
-					}
-				}, 1);
-			}
-		},
-		// 모든 활성화 클래스 제거
-		'removeAllActiveClass': function() {
-			var cn = this.config.activeClass;
-			this.$el.find('.'+cn).removeClass(cn);
-		},
-		// 이벤트 핸들링: 키보드 방향키 탐색
-		'keyboardControls': function(e) {
-			var lv1LinksLen = this.$lv1Links.length,
-				key         = e.keyCode || e.which;
-
-			// 사용자가 누른 화살표키를 조건 분기하여 lv1 <a> 포커스 이동
-			switch(key) {
-				case 37: // 왼쪽 화살표 키
-				case 38: // 위쪽 화살표 키
-					if ( --this.menuitemCurrent < 0 ) {
-						this.menuitemCurrent = lv1LinksLen-1;
-					}
-					this.$lv1Links.attr('tabindex', -1);
-					this.$lv1Links.eq(this.menuitemCurrent).attr('tabindex', 0).focus();
-				break;
-				case 39: // 오른쪽 화살표 키
-				case 40: // 아래쪽 화살표 키
-					if ( ++this.menuitemCurrent >= lv1LinksLen ) {
-						this.menuitemCurrent = 0;
-					}
-					this.$lv1Links.attr('tabindex', -1);
-					this.$lv1Links.eq(this.menuitemCurrent).attr('tabindex', 0).focus();
-			}
-		},
 		// 이벤트 핸들링: 업데이트 WAI-ARIA 상태
 		'updateARIAStates': function(e) {
 			var widget = this;
@@ -319,7 +279,47 @@ define([
 			// this.config.autoClose 설정 값이 참일 경우,
 			// this.autoClose(e) 실행
 			this.config.autoClose && this.autoClose(e);
-		}
+		},
+		// 이벤트 핸들링: 키보드 방향키 탐색
+		'keyboardControls': function(e) {
+			var lv1LinksLen = this.$lv1Links.length,
+				key         = e.keyCode || e.which;
+
+			// 사용자가 누른 화살표키를 조건 분기하여 lv1 <a> 포커스 이동
+			switch(key) {
+				case 37: // 왼쪽 화살표 키
+				case 38: // 위쪽 화살표 키
+					if ( --this.menuitemCurrent < 0 ) {
+						this.menuitemCurrent = lv1LinksLen-1;
+					}
+					this.$lv1Links.attr('tabindex', -1);
+					this.$lv1Links.eq(this.menuitemCurrent).attr('tabindex', 0).focus();
+				break;
+				case 39: // 오른쪽 화살표 키
+				case 40: // 아래쪽 화살표 키
+					if ( ++this.menuitemCurrent >= lv1LinksLen ) {
+						this.menuitemCurrent = 0;
+					}
+					this.$lv1Links.attr('tabindex', -1);
+					this.$lv1Links.eq(this.menuitemCurrent).attr('tabindex', 0).focus();
+			}
+		},
+		// 자동 닫힘 설정
+		'autoClose': function(e) {
+			var widget = this;
+			if (e.type === 'focusout') {
+				setTimeout(function() {
+					if(widget.$lv1.attr('aria-activedescendant') == '') {
+						widget.removeAllActiveClass();
+					}
+				}, 1);
+			}
+		},
+		// 모든 활성화 클래스 제거
+		'removeAllActiveClass': function() {
+			var cn = this.config.activeClass;
+			this.$el.find('.'+cn).removeClass(cn);
+		},
 
 	};
 
