@@ -35,6 +35,7 @@ js/libs/detectizr.js
 js/libs/jquery.js
 js/utils/jquery.utils.js
 js/plugins/radioClass/jquery.radioClass.js
+js/plugins/navigationBar/jquery.navigationBar.js
 js/plugins/skipNav/jquery.skipNav.js
 
 js/pages/main.js

@@ -139,6 +139,10 @@ var SRC = 'src/',
 				deps    : ['jquery'],
 				exports : '$.fn.skipNav'
 			},
+			'plugins/navigationBar/jquery.navigationBar': {
+				deps    : ['jquery'],
+				exports : '$.fn.navigationBar'
+			},
 		},
 		// 멀티 페이지 모듈 병합 설정
 		modules: [
@@ -150,6 +154,7 @@ var SRC = 'src/',
 					'jquery',
 					'utils/jquery.utils',
 					'plugins/radioClass/jquery.radioClass',
+					'plugins/navigationBar/jquery.navigationBar',
 					'plugins/skipNav/jquery.skipNav',
 				]
 			},
