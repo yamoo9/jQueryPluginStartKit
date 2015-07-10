@@ -21,7 +21,7 @@ var SRC = 'src/',
 			out : OUT + 'html/**/*.html',
 		},
 		css: {
-			src   : [ SRC + 'css/style.css', SRC + 'css/part/**/*' ],
+			src   : [ SRC + 'css/style.css', SRC + 'css/part/**/*', SRC + 'js/plugins/**/*.css'  ],
 			out   : [ OUT + 'css/style.css', OUT + 'css/part/**/*' ],
 			build : [BID + 'css/', BID + 'css/part'],
 		},
