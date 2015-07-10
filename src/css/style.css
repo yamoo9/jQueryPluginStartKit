@@ -13,3 +13,58 @@
 
 /* jquery.navigationBar 플러그인: 테마 */
 @import "../js/plugins/navigationBar/jquery.navigationBar.css";
+
+
+
+
+
+body {
+	background: #fff;
+	font: 14px/1.5 "Nanum gothic";
+}
+
+header {
+	background: #f5f7f8;
+	border-bottom: 1px solid #e8eaed;
+}
+
+header * {
+	margin: 0;
+}
+
+.container {
+	width: 951px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 52px;
+	padding-bottom: 4px;
+}
+
+.container::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+header h1 {
+	float: left;
+	font-size: 16px;
+	line-height: 1.13;
+	letter-spacing: -0.06em;
+}
+
+header h1 a {
+	overflow: hidden;
+	text-indent: -9999em;
+	display:block;
+	width:241px;
+	height:21px;
+	background:url(http://i1.daumcdn.net/image.hope/etc/privacy/gnb_privacy_150327.gif) no-repeat 0 0;
+}
+
+nav {
+	margin-top: -10px;
+	padding-left: 100px;
+	padding-bottom: 6px;
+}
+

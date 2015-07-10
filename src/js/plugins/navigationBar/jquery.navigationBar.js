@@ -96,6 +96,10 @@ define([
 			$.each(widget.$lv1Links, function(index, link) {
 				widget.$lv1Links.eq(index).data('idx', index);
 			});
+
+			$.each(widget.$lv2, function(index, el) {
+				widget.$lv2.eq(index).addClass('o' + (index+1));
+			});
 		},
 
 		// 설정: class 속성
