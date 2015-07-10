@@ -21,7 +21,10 @@
 	margin:   0;
 }
 
-.yamoo9-navigation-bar .lv-2,
-.yamoo9-navigation-bar .lv-3 {
+.yamoo9-navigation-bar .lv-1 .menu {
 	display: none;
+}
+
+.yamoo9-navigation-bar .on > .menu {
+	display: block;
 }
