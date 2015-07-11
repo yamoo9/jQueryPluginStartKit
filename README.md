@@ -49,7 +49,7 @@ STEP3 과정에서는 플러그인에 각각 적용되는 이벤트를 고려하
 ```css
 /*! jquery.navigationBar.css © yamoo9.net, 2015 */
 
-.i11y-hidden {
+.a11y-hidden {
 	overflow: hidden;
 	position: absolute;
 	clip:     rect(0 0 0 0);
@@ -60,8 +60,8 @@ STEP3 과정에서는 플러그인에 각각 적용되는 이벤트를 고려하
 	padding:  0;
 	border:   0;
 }
-.i11y-hidden.focusable:focus,
-.i11y-hidden.focusable:active {
+.a11y-hidden.focusable:focus,
+.a11y-hidden.focusable:active {
 	overflow: visible;
 	position: static;
 	clip:     auto;
