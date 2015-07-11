@@ -50,10 +50,10 @@ require(['../common'], function(common) {
 		};
 
 		// $gnb 인스턴스 객체에 플러그인 navigationBar() 연결
-		var $gnb = $('#gnb, #gnb2').navigationBar({
-			// 'useTabFocus': false,
-			// 'autoClose'  : false,
-			// 'hoverFocus' : false
+		var $gnb = $('#gnb').navigationBar({
+			'useTabFocus': false,
+			'autoClose': false,
+			'hoverFocus': false
 		});
 
 	});
