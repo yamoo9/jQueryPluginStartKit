@@ -1,6 +1,6 @@
 /*! jquery.navigationBar.css © yamoo9.net, 2015 */
 
-.i11y-hidden {
+.a11y-hidden {
 	overflow: hidden;
 	position: absolute;
 	clip:     rect(0 0 0 0);
@@ -11,8 +11,8 @@
 	padding:  0;
 	border:   0;
 }
-.i11y-hidden.focusable:focus,
-.i11y-hidden.focusable:active {
+.a11y-hidden.focusable:focus,
+.a11y-hidden.focusable:active {
 	overflow: visible;
 	position: static;
 	clip:     auto;

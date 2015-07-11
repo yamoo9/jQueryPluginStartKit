@@ -109,8 +109,8 @@ define([
 		'setARIAStates': function() {
 			// 현재 상태를 제공할 span 요소 생성
 			$('<span>', {
-				'id': 'i11y-current-desc',
-				'class': 'i11y-hidden'
+				'id': 'a11y-current-desc',
+				'class': 'a11y-hidden'
 			}).appendTo( this.$el );
 
 			// 메뉴바(ul) 요소에 현재 활성화된 상태의 ID 설정을 위한 준비

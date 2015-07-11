@@ -79,7 +79,7 @@ var $gnb = $('#gnb').navigationBar({
 ```css
 /*! jquery.navigationBar.css © yamoo9.net, 2015 */
 
-.i11y-hidden {
+.a11y-hidden {
 	overflow: hidden;
 	position: absolute;
 	clip:     rect(0 0 0 0);
@@ -90,8 +90,8 @@ var $gnb = $('#gnb').navigationBar({
 	padding:  0;
 	border:   0;
 }
-.i11y-hidden.focusable:focus,
-.i11y-hidden.focusable:active {
+.a11y-hidden.focusable:focus,
+.a11y-hidden.focusable:active {
 	overflow: visible;
 	position: static;
 	clip:     auto;
@@ -274,8 +274,8 @@ var $gnb = $('#gnb').navigationBar({
 	'setARIAStates': function() {
 		// 현재 상태를 제공할 span 요소 생성
 		$('<span>', {
-			'id': 'i11y-current-desc',
-			'class': 'i11y-hidden'
+			'id': 'a11y-current-desc',
+			'class': 'a11y-hidden'
 		}).appendTo( this.$el );
 
 		// 메뉴바(ul) 요소에 현재 활성화된 상태의 ID 설정을 위한 준비
