@@ -1,8 +1,10 @@
+/*! jquery.navigationBar.js © yamoo9.net, 2015 */
 define([
 	// 의존 모듈 호출
 	'plugins/radioClass/jquery.radioClass',
 	'utils/jquery.utils'
-], function() {
+],
+function() {
 	'use strict';
 
 	/**
@@ -11,8 +13,6 @@ define([
 	 * ----------------------------------------------------------------------------------- */
 	var plugin = 'navigationBar',
 		build  = 0;
-
-
 
 	/**
 	 * 플러그인 객체 생성자
@@ -26,7 +26,7 @@ define([
 
 		// 메뉴아이템(<a>) ID 인덱스
 		// 메뉴아이템 요소 ID 동적 생성에 활용
-		this.menuitemIndex   = 0;
+		this.menuitemIndex = 0;
 
 		// 메뉴아이템 현재 활성화된 인덱스
 		// 키보드 방향키를 통한 내비게이션 설정에 활용
@@ -43,9 +43,12 @@ define([
 	 * ----------------------------------------------------------------------------------- */
 	NavigationBar.prototype = {
 
-
 		/**
 		 * 초기화
+		 * -----------------------------------------------------------------------------------
+		 * 빌드 넘버 업데이트 (페이지에 플러그인 적용 요소가 추가될 때 마다 업데이트)
+		 * 설정 실행
+		 * 이벤트 연결 실행
 		 * -----------------------------------------------------------------------------------
 		 */
 		'init': function() {
@@ -55,25 +58,30 @@ define([
 			this.settings();
 			// 초기화: 플러그인 이벤트 설정
 			this.events();
-
 		},
 
-
 		/**
-		 * 설정: refLvEls, class, WAI-ARIA
+		 * 설정
+		 * -----------------------------------------------------------------------------------
+		 * 레벨 요소 참조 (referenceLevelElements)
+		 * class 속성 설정
+		 * WAI-ARIA 역할/속성/상태 설정
 		 * -----------------------------------------------------------------------------------
 		 */
 		'settings': function() {
 			// 각 레벨 요소 참조 설정
-			this.refLvEls();
+			this.referenceLevelElements();
 			// 클래스 속성 설정
 			this.setClass();
 			// WAI-ARIA 설정 유무 확인 후 처리
+			// 옵션 (this.config) aria 값이 참이면
+			// this.setARIA() 실행
 			this.config.aria && this.setARIA();
 		},
 
-		// 설정: 내비게이션 레벨별 참조 요소 설정
-		'refLvEls': function() {
+		/* -----------------------------------------------------------------------------------
+		 * 설정: 내비게이션 레벨별 참조 요소 설정 */
+		'referenceLevelElements': function() {
 			// this 객체 widget 변수에 참조
 			// $.each() 내부 콜백 function 내부의 this 참조 대상이 바뀌기 때문
 			var widget = this;
@@ -96,34 +104,43 @@ define([
 			$.each(widget.$lv1Links, function(index, link) {
 				widget.$lv1Links.eq(index).data('idx', index);
 			});
+		},
 
+		/* -----------------------------------------------------------------------------------
+		 * 설정: class 속성 */
+		'setClass': function() {
+			// 위젯, 옵션 설정 참조
+			var widget = this,
+				config = widget.config;
+
+			// nav 클래스 속성 설정
+			widget.$el
+				.addClass( config.prefix + '-' + config.navClass )
+				.addClass( config.direction );
+			// nav > ul 클래스 속성 설정
+			widget.$lv1.addClass( config.levelClasses.lv1 + ' menubar' );
+			// nav > ul > li > ul 클래스 속성 설정
+			widget.$lv2.addClass( config.levelClasses.lv2 + ' menu' );
+			// nav > ul > li > ul > li > ul 클래스 속성 설정
+			widget.$lv3.addClass( config.levelClasses.lv3 + ' menu' );
+
+			// $lv2(<ul>) 집합을 순환하여 각 요소에 인덱스 처리
+			// CSS 스타일을 위한 설정
 			$.each(widget.$lv2, function(index, el) {
 				widget.$lv2.eq(index).addClass('o' + (index+1));
 			});
 		},
 
-		// 설정: class 속성
-		'setClass': function() {
-			var config = this.config;
-			// nav 클래스 속성 설정
-			this.$el
-				.addClass( config.prefix + '-' + config.navClass )
-				.addClass( config.direction );
-			// nav > ul 클래스 속성 설정
-			this.$lv1.addClass( config.levelClasses.lv1 + ' ' + 'menubar' );
-			// nav > ul > li > ul 클래스 속성 설정
-			this.$lv2.addClass( config.levelClasses.lv2 + ' ' + 'menu' );
-			// nav > ul > li > ul > li > ul 클래스 속성 설정
-			this.$lv3.addClass( config.levelClasses.lv3 + ' ' + 'menu' );
-		},
-
-		// 설정: WAI-ARIA 역할/속성/상태
+		/* -----------------------------------------------------------------------------------
+		 * 설정: WAI-ARIA 역할|속성|상태 */
 		'setARIA': function() {
 			this.setARIARoles();      // 역할 설정
 			this.setARIAProperties(); // 속성 설정
 			this.setARIAStates();     // 상태 설정
 		},
-		// 설정: WAI-ARIA 역할
+
+		/* -----------------------------------------------------------------------------------
+		 * 설정: WAI-ARIA 역할 */
 		'setARIARoles': function() {
 			// nav 역할: navigation 설정
 			this.$el.attr('role', 'navigation');
@@ -136,10 +153,13 @@ define([
 			// nav > ul ul 역할: menu 설정
 			this.$lv1.find('ul').attr('role', 'menu');
 		},
-		// 설정: WAI-ARIA 속성
+
+		/* -----------------------------------------------------------------------------------
+		 * 설정: WAI-ARIA 속성 */
 		'setARIAProperties': function() {
 			var widget    = this,
 				$menuitem = widget.$el.find('a');
+
 			$.each($menuitem, function(index, el) {
 				var $item = $menuitem.eq(index);
 
@@ -158,9 +178,11 @@ define([
 					// nav a + ul 속성 설정
 					.next().attr('aria-describedby', $item.attr('id'));
 				}
-			})
+			});
 		},
-		// 설정: WAI-ARIA 상태
+
+		/* -----------------------------------------------------------------------------------
+		 * 설정: WAI-ARIA 상태 */
 		'setARIAStates': function() {
 			// 현재 상태를 제공할 span 요소 동적 생성
 			$('<span>', {
@@ -199,28 +221,33 @@ define([
 		/**
 		 * 이벤트 핸들링
 		 * -----------------------------------------------------------------------------------
+		 * 내비게이션 메뉴 아이템 탐색 설정
+		 * 키보드 방향키 설정
+		 * 자동 메뉴 닫힘 설정
+		 * -----------------------------------------------------------------------------------
 		 */
 		'events': function() {
 			var widget    = this,
 				// this.config.hoverFocus 값이 참인지 유무를 확인하여 이벤트 처리하는 변수
-				assignEvt = this.config.hoverFocus ? 'mouseenter mouseleave focus blur' : 'click';
+				assignEvt = widget.config.hoverFocus ? 'mouseenter mouseleave focus blur' : 'click';
 
 			// 내비게이션 메뉴아이템 assignEvt 이벤트 핸들링
-			this.$el.on(assignEvt, 'a', $.proxy(this.expandToggleMenu, this));
+			widget.$el.on(assignEvt, 'a', $.proxy(widget.expandToggleMenu, widget));
 
 			// 내비게이션 메뉴아이템 focusin, focusout 이벤트 핸들링
 			assignEvt = assignEvt === 'click' ? assignEvt + ' focus blur' : assignEvt;
-			this.$el.on(assignEvt, 'a', $.proxy(this.updateARIAStates, this));
+			widget.$el.on(assignEvt, 'a', $.proxy(widget.updateARIAStates, widget));
 
 			// 키보드 방향키 컨트롤 이벤트 핸들링
-			this.$lv1Links.on('keydown keypress click', $.proxy(this.keyboardControls, this));
+			widget.$lv1Links.on('keydown keypress click', $.proxy(widget.keyboardControls, widget));
 
-			// this.config.autoClose 설정 값이 참일 경우,
-			// this.$el 요소에 mouseleave 이벤트 핸들링 : 자동으로 펼쳐진 메뉴 닫기
-			this.config.autoClose && this.$el.on('mouseleave', $.proxy(this.removeAllActiveClass, this));
-
+			// widget.config.autoClose 설정 값이 참일 경우,
+			// widget.$el 요소에 mouseleave 이벤트 핸들링 : 자동으로 펼쳐진 메뉴 닫기
+			widget.config.autoClose && widget.$el.on('mouseleave', $.proxy(widget.removeAllActiveClass, widget));
 		},
-		// 이벤트 핸들링: 메뉴 펼침 토글
+
+		/* -----------------------------------------------------------------------------------
+		 * 이벤트 핸들링: 메뉴 펼침 토글 */
 		'expandToggleMenu': function(e) {
 			var config = this.config,
 				// Firefox에서 $.$() 문제 발생으로 $()로 대신 처리
@@ -237,46 +264,51 @@ define([
 			// 키보드 방향키 탐색 컨트롤에서 this.menuitemCurrent 참조
 			this.menuitemCurrent = $link.data('idx');
 		},
-		// 이벤트 핸들링: 업데이트 WAI-ARIA 상태
+
+		/* -----------------------------------------------------------------------------------
+		 * 이벤트 핸들링: 업데이트 WAI-ARIA 상태 */
 		'updateARIAStates': function(e) {
-			var widget = this;
 
 			// $lv1(<ul>) 요소의 aria-activedescendant 속성 값에 현재 활성화된 포커스 요소 ID 설정
-			this.$lv1.attr('aria-activedescendant', $.activeElement().id);
+			this.$lv1.attr('aria-activedescendant', $.activeElement().getAttribute('id'));
 
-			// 요소에 포커스 되었을 때
+			// 이벤트 유형 체크
 			switch (e.type) {
 
+				// 포커스인 되었을 때
 				case 'focusin':
 					// 포커스가 적용된 대상
-					widget.$focusEl = $.$($.activeElement());
+					this.$focusEl = $.$($.activeElement());
+
+				// 클릭, 마우스 진입되었을 때
 				case 'click':
 				case 'mouseenter':
 					// 마우스가 올라간 대상
-					widget.$focusEl = $.$(e.target);
+					this.$focusEl = $.$(e.target);
 
 					// 현재 활성화된 $link에 aria-describedby 상태 업데이트
-					widget.$focusEl.attr('aria-describedby', 'a11y-current-desc');
-					$.$('#a11y-current-desc').text('현재 키보드가 활성화된 위치는 "' + widget.$focusEl.text() +'" 메뉴 입니다.');
+					this.$focusEl.attr('aria-describedby', 'a11y-current-desc');
+					$.$('#a11y-current-desc').text('현재 키보드가 활성화된 위치는 "' +	this.$focusEl.text() +'" 메뉴 입니다.');
 
 					// 접혀진 메뉴(<ul>) 상태 업데이트
-					widget.$lv2.add(widget.$lv3).filter(':hidden').attr({
+					this.$lv2.add(this.$lv3).filter(':hidden').attr({
 						'aria-hidden'   : true,
 						'aria-expanded' : false
 					});
 					// 펼쳐진 메뉴(<ul>) 상태 업데이트
-					widget.$focusEl.next(':visible').attr({
+					this.$focusEl.next(':visible').attr({
 						'aria-hidden'   : false,
 						'aria-expanded' : true
 					});
 
 				break;
 
+				// 포커스아웃, 마우스가 떠났을 때
 				case 'focusout':
 				case 'mouseleave':
 
 					// 현재 비활성화된 $link에 aria-describedby 상태 업데이트
-					widget.$focusEl.attr('aria-describedby', '');
+					this.$focusEl.attr('aria-describedby', '');
 
 			}
 
@@ -284,7 +316,9 @@ define([
 			// this.autoClose(e) 실행
 			this.config.autoClose && this.autoClose(e);
 		},
-		// 이벤트 핸들링: 키보드 방향키 탐색
+
+		/* -----------------------------------------------------------------------------------
+		 * 이벤트 핸들링: 키보드 방향키 탐색 */
 		'keyboardControls': function(e) {
 			var lv1LinksLen = this.$lv1Links.length,
 				key         = e.keyCode || e.which;
@@ -308,7 +342,9 @@ define([
 					this.$lv1Links.eq(this.menuitemCurrent).attr('tabindex', 0).focus();
 			}
 		},
-		// 자동 닫힘 설정
+
+		/* -----------------------------------------------------------------------------------
+		 * 자동 닫힘 설정 */
 		'autoClose': function(e) {
 			var widget = this;
 			if (e.type === 'focusout') {
@@ -321,10 +357,9 @@ define([
 		},
 		// 모든 활성화 클래스 제거
 		'removeAllActiveClass': function() {
-			var cn = this.config.activeClass;
-			this.$el.find('.'+cn).removeClass(cn);
+			var _className = this.config.activeClass;
+			this.$el.find('.'+_className).removeClass(_className);
 		},
-
 	};
 
 	/**
@@ -342,7 +377,10 @@ define([
 			var $el = $this.eq(index);
 
 			// NavigationBar 객체 생성 및 인자 전달
-			new NavigationBar($el, options);
+			var navigationbar = new NavigationBar($el, options);
+
+			// 플러그인 인스턴스 객체의 .data('navigationbar')에 NavigationBar 인스턴스 객체 참조
+			$el.data('navigationbar', navigationbar);
 
 			// jQuery 체이닝 처리를 위한 return
 			return $el;
